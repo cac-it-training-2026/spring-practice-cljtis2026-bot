@@ -1,5 +1,21 @@
 package jp.co.sss.practice.p07.q04.controller;
 
-public class Practice0704Controller {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import jp.co.sss.practice.p07.repository.FruitsShopItemRepository;
+
+@Controller
+public class Practice0704Controller {
+	@Autowired
+	private FruitsShopItemRepository fruitsShopItemRepository;
+	
+	@RequestMapping(path = "/fruits_shop/type/sort/bycount",method = RequestMethod.GET)
+    public String showFruitsShopItem(Model model) {
+		model.addAttribute("typeList",fruitsShopItemRepository.findQuerySortByTypeCount());
+		return "practice07/04/type_list";
+    }
 }
